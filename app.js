@@ -37,7 +37,8 @@ app.get('/index.html', (req, res) => {
 
 
 // Connect to Mo
-
+  "mongodb+srv:cluster0.qqa5zeu.mongodb.net/?appName=Cluster0"
+mongoose.connect
     // Start the server after successful database connection
     .then(() => {
         app.listen(port, () => {
