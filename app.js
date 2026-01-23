@@ -36,8 +36,7 @@ app.get('/index.html', (req, res) => {
 
 
 
-// Connect to MongoDB
-mongoose.connect("mongodb+srv://williamfaisal423:0915539084DB@cluster0.qqa5zeu.mongodb.net/?appName=Cluster0")
+// Connect to Mo
 
     // Start the server after successful database connection
     .then(() => {
