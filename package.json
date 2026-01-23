@@ -1,16 +1,26 @@
 {
-  "name": "node_express",
+  "name": "node_express1",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faisalwilliam/Node_Express1.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/faisalwilliam/Node_Express1/issues"
+  },
+  "homepage": "https://github.com/faisalwilliam/Node_Express1#readme",
   "dependencies": {
+    "ejs": "^4.0.1",
     "express": "^5.2.1",
+    "mongoose": "^9.1.5",
     "nodemon": "^3.1.11"
   }
 }
