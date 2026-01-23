@@ -3,9 +3,32 @@ const app = express()
 const port = 3000
 const mongoose = require('mongoose')
 app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 const MyData = require('./views/models/mydataSchema')
 // Set EJS as the templating engine
 app.set('view engine', 'ejs');
+app.use(express.static("public"));
+
+// Auto Refresh the browser on file changes (for development purposes)
+ /*
+const path = require("path");
+const livereload = require("livereload");
+const liveReloadServer = livereload.createServer();
+liveReloadServer.watch(path.join(__dirname, 'public'));
+ 
+ 
+const connectLivereload = require("connect-livereload");
+app.use(connectLivereload());
+ 
+liveReloadServer.server.once("connection", () => {
+  setTimeout(() => {
+    liveReloadServer.refresh("/");
+  }, 100);
+});
+*/
+
+// Route to handle the home page
+
 
 
 
@@ -13,14 +36,14 @@ app.set('view engine', 'ejs');
 // Serve static files from the "views" directory
 app.get('/', (req, res) => {
 
-    //object ===> Array of objects
+
 
     // Retrieve data from MongoDB
     MyData.find().then((result) => {
 
         // Render the "home" template and pass the title variable
-    res.render("home", {mytile: "Home Page", arr: result});
-       
+        res.render("home", { mytile: "Home Page", arr: result });
+
     }).catch((error) => {
         console.error('Error retrieving data from MongoDB:', error);
     });
@@ -31,14 +54,15 @@ app.get('/', (req, res) => {
 
 // Route to handle /index.html
 app.get('/index.html', (req, res) => {
+
     res.send("<h1>Data send successfully</h1>")
 })
 
 
 
-// Connect to Mo
-  "mongodb+srv:cluster0.qqa5zeu.mongodb.net/?appName=Cluster0"
-mongoose.connect
+// Connect to MongoDB
+
+
     // Start the server after successful database connection
     .then(() => {
         app.listen(port, () => {
@@ -57,11 +81,12 @@ app.post('/', (req, res) => {
     const mydata = new MyData(req.body)
     mydata.save().then(() => {
 
-// Redirect to /index.html after successful save
-    res.redirect("/index.html")
+        // Redirect to /index.html after successful save
+        res.redirect("/index.html")
     }).catch((error) => {
         console.error('Error saving data to MongoDB:', error)
         res.status(500).send('Internal Server Error')
     })
-  
-        })
+
+})
+

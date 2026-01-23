@@ -1,38 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= mytile %></title>
+    <title>
+        <%= mytile %>
+    </title>
+    <link rel="stylesheet" href="style.css">
+
     <style>
-       input, button {
-          
+        input,
+        button {
+
             border-radius: 5px;
             cursor: pointer;
         }
-        h1 {
-            color: rgb(255, 0, 128);
-        }
     </style>
 </head>
-<body>
-<h1>
-What is your Username?
 
-</h1>
-<!-- Form to send data to the server -->
-<form  action="/" method="post">
-    <input name="Usernamee" type="text">
-  
+<body>
+    <h1>
+        What is your Username?
+
+    </h1>
+    <!-- Form to send data to the server -->
+    <form action="/" method="post">
+        <input name="Usernamee" type="text">
+
+        <br><br>
+
+        <button>Send DB</button>
+    </form>
     <br><br>
 
-    <button>Send DB</button>
-</form>
-<br><br>
-  
-// Display the last username from the array
-<h1> Your name is <%= arr.at(-1).Usernamee %></h1>
 
-    
+    <h1> Your name is <%= arr.at(-1).Usernamee %>
+    </h1>
+
+   
 </body>
+
 </html>
