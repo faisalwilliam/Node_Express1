@@ -1,0 +1,20 @@
+
+ .bi-lightning-charge{
+    margin-right: 0.5rem;
+    font-size: 1.9rem;
+}
+.bi.bi-list{
+    font-size: 1.5rem;
+    color: rgb(0, 0, 0);
+}
+.button .bi.bi-list:hover{
+    color: rgb(33, 37, 41);
+    cursor: pointer;
+}
+.bi.bi-list:hover{
+    color: rgb(205, 211, 217);
+    cursor: pointer;
+ 
+}
+
+

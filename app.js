@@ -2,15 +2,17 @@ const express = require('express')
 const app = express()
 const port = 3000
 const mongoose = require('mongoose')
+const methodOverride = require('method-override')
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-const MyData = require('./views/models/mydataSchema')
+app.use(methodOverride('_method'))
+const MyData = require('./models/mydataSchema')
 // Set EJS as the templating engine
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
 
 // Auto Refresh the browser on file changes (for development purposes)
- /*
+/*
 const path = require("path");
 const livereload = require("livereload");
 const liveReloadServer = livereload.createServer();
@@ -21,47 +23,71 @@ const connectLivereload = require("connect-livereload");
 app.use(connectLivereload());
  
 liveReloadServer.server.once("connection", () => {
-  setTimeout(() => {
-    liveReloadServer.refresh("/");
-  }, 100);
+ setTimeout(() => {
+   liveReloadServer.refresh("/");
+ }, 100);
 });
 */
 
 // Route to handle the home page
-
-
-
-
-
-// Serve static files from the "views" directory
 app.get('/', (req, res) => {
-
-
-
-    // Retrieve data from MongoDB
-    MyData.find().then((result) => {
-
-        // Render the "home" template and pass the title variable
-        res.render("home", { mytile: "Home Page", arr: result });
-
-    }).catch((error) => {
-        console.error('Error retrieving data from MongoDB:', error);
-    });
-
-
-
+    MyData.find()
+        .then((result) => {
+            res.render("index", { arr: result });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 })
 
 // Route to handle /index.html
-app.get('/index.html', (req, res) => {
+app.get("/user/add.html", (req, res) => {
 
-    res.send("<h1>Data send successfully</h1>")
+    res.render("user/add", {});
 })
+// Route to handle /index.html
+app.get("/user/view/:id", (req, res) => {
+    MyData.findById(req.params.id)
+        .then((result) => {
+            res.render("user/view", { obj: result });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+})
+// Route to handle /index.html
+app.get("/user/edit/:id", (req, res) => {
+    MyData.findById(req.params.id)
+        .then((result) => {
+            res.render("user/edit", { obj: result });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+})
+app.put("/user/edit/:id", (req, res) => {
+    MyData.findByIdAndUpdate(req.params.id, req.body)
+        .then(() => {
+            res.redirect("/");
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
 
-
+// Route to handle delete
+app.delete("/user/:id", (req, res) => {
+    MyData.findByIdAndDelete(req.params.id)
+        .then(() => {
+            res.redirect("/");
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
 
 // Connect to MongoDB
-
+mongoose.connect("mongodb+srv://williamfaisal423:0915393065DB@cluster0.qqa5zeu.mongodb.net/?appName=Cluster0")
 
     // Start the server after successful database connection
     .then(() => {
@@ -82,11 +108,10 @@ app.post('/', (req, res) => {
     mydata.save().then(() => {
 
         // Redirect to /index.html after successful save
-        res.redirect("/index.html")
+        res.redirect("/")
     }).catch((error) => {
         console.error('Error saving data to MongoDB:', error)
         res.status(500).send('Internal Server Error')
     })
 
 })
-
