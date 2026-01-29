@@ -87,7 +87,7 @@ app.delete("/user/:id", (req, res) => {
 });
 
 // Connect to MongoDB
-mongoose.connect("mongodb+srv://williamfaisal423:0915393065DB@cluster0.qqa5zeu.mongodb.net/?appName=Cluster0")
+mongoose.connect("mongodb+srv://williamfaisal")
 
     // Start the server after successful database connection
     .then(() => {
